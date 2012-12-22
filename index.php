@@ -10,7 +10,7 @@
  * @license  LGPL http://www.gnu.org/licenses/lgpl.html
  * @link     http://rudloff.pro/
  * */
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 require 'config.php';
 if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
     $query=$sql->query(
