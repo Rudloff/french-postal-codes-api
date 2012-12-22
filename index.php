@@ -11,6 +11,7 @@
  * @link     http://rudloff.pro/
  * */
 header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Origin: *');
 require 'config.php';
 if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
     $query=$sql->query(
