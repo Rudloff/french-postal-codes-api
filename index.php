@@ -19,7 +19,7 @@ if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
     );
     $result=$query->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        print(json_encode($result));
+        $result=(json_encode($result));
     } else {
         //Si on ne trouve pas, on prend le code le plus proche
         $code=substr_replace($_GET['codepos'], '', -3);
@@ -27,9 +27,11 @@ if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
             'SELECT * FROM `Codes postaux` WHERE Codepos='.$code.'000;'
         );
         $result=$query->fetch(PDO::FETCH_ASSOC);
-        print(json_encode($result));
+        $result=(json_encode($result));
     }
 } else {
-    print(json_encode(false));
+    $result=(json_encode(false));
 }
+header('ETag: '.md5($result));
+print($result);
 ?>
