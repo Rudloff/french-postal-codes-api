@@ -15,7 +15,7 @@ header('Access-Control-Allow-Origin: *');
 require 'config.php';
 if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
     $query=$sql->query(
-        'SELECT * FROM `Codes postaux` WHERE Codepos='.$_GET['codepos'].';'
+        'SELECT * FROM `Codes postaux` WHERE Codepos='.$sql->quote($_GET['codepos']).';'
     );
     $result=$query->fetch(PDO::FETCH_ASSOC);
     if ($result) {
@@ -24,7 +24,7 @@ if (isset($_GET['codepos']) && !empty($_GET['codepos'])) {
         //Si on ne trouve pas, on prend le code le plus proche
         $code=substr_replace($_GET['codepos'], '', -3);
         $query=$sql->query(
-            'SELECT * FROM `Codes postaux` WHERE Codepos='.$code.'000;'
+            'SELECT * FROM `Codes postaux` WHERE Codepos='.$sql->quote($code.'000').';'
         );
         $result=$query->fetch(PDO::FETCH_ASSOC);
         $result=(json_encode($result));
